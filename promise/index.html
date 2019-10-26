@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="lib/Promise_Function.js"></script>
+<script>
+    const p = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(1)
+        }, 1000)
+    });
+    p.then(
+        value => {console.log(value); return 10},
+        reason => {console.log(reason)}
+    ).then(value => console.log(value),
+        reason => console.log(reason)
+    );
+    const p1 = Promise.resolve(111);
+    const p11 = Promise.resolve(222);
+    const p2 = Promise.reject(333);
+    p1.then(value => console.log(value));
+    p2.catch(reason => console.log(reason));
+    const p3 = Promise.race([10, p1, p11]);
+    p3.then(
+        value => console.log("race", value),
+        reason => console.log(reason)
+    )
+</script>
+</body>
+</html>
